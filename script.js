@@ -1,5 +1,5 @@
 let count = 0;
-const reminderAt = 5;
+const reminderAt = 108;
 
 const countDisplay = document.getElementById('countDisplay');
 const countBtn = document.getElementById('countBtn');
@@ -19,3 +19,4 @@ resetBtn.addEventListener('click', () => {
     count = 0;
     countDisplay.textContent = count;
 });
+
