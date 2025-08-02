@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Heading ====================================== >>> */
+#heading {
+    height: 4rem;
+}
+
+#heading h1 {
+    font-size: 3rem;
+}
+
+/* Button ======================================== >>> */
+.main-btn {
+    height: 25rem;
+    width: 100%;
+    background: gold;
+    border: 3px solid black;
+    box-shadow: 5px 5px black;
+    padding: 5px;
+}
+
+.main-btn:active {
+    box-shadow: 2px 2px black;
+    transform: translate(2px, 2px);
+}
+
+.main-btn h1 {
+    font-weight: bold;
+    font-size: 10rem;
+}
+
+/* Reset button =============================== */
+.reset-btn {
+    margin-left: 1rem;
+    background: orangered;
+    border: 3px solid black;
+    padding: 8px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.1rem;
+    box-shadow: 4px 4px black;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+.reset-btn:active {
+    box-shadow: 2px 2px black;
+    transform: translate(2px, 2px);
+}
