@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="">
+    <link rel="stylesheet" href="style.css">
+    <title>Bolo Radha Radha</title>
+    <link rel="icon" type="image/x-icon" href="img/radha.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar ================================ -->
+    <section id="navbar" class="pt-3">
+        <nav class="navbar">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="img/radha.png" alt="Profile Photo">
+                </div>
+                <i class="fa-solid fa-bars" type="button" data-bs-toggle="modal" data-bs-target="#SettingModal"></i>
+            </div>
+        </nav>
+    </section>
+    <!-- Heading ================================== -->
+    <section id="heading" class="my-2">
+        <div class="container d-flex justify-content-center align-items-center">
+            <h1 class="text-center">Radha Radha</h1>
+        </div>
+    </section>
+
+    <!-- Button =================================== -->
+    <section id="button" class="my-3">
+        <div class="container d-flex justify-content-center align-items-center">
+            <button class="main-btn" id="countBtn">
+                <h1 id="countDisplay">0</h1>
+            </button>
+        </div>
+    </section>
+
+    <!-- Reset Button ============================= -->
+    <section id="reset" class="my-5">
+        <div class="container d-flex justify-content-center align-items-center">
+            <button id="resetbtn" class="reset-btn">RESET</button>
+        </div>
+    </section>
+
+    <!-- Setting Modal ========================================================= -->
+    <div class="modal fade" id="SettingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Setting</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center flex-column">
+                    <h1>Bolo Radhe Radhe</h1>
+                    <label for="beepInput" class="form-label mt-3">Beep when count reaches:</label>
+                    <input type="number" id="beepInput" class="form-control text-center" min="1" value="108"
+                        style="width: 100px;">
+                    <button id="saveBeepBtn" class="btn btn-primary mt-3" data-bs-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Beep =============================== -->
+    <audio id="beepSound">
+        <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+    </audio>
+
+
+
+
+    <script>
+        let count = 0;
+        let reminderAt = 108; // default if no saved value
+
+        const countDisplay = document.getElementById('countDisplay');
+        const countBtn = document.getElementById('countBtn');
+        const resetBtn = document.getElementById('resetbtn');
+        const beepSound = document.getElementById('beepSound');
+        const beepInput = document.getElementById('beepInput');
+        const saveBeepBtn = document.getElementById('saveBeepBtn');
+
+        // Load saved value from localStorage (if exists)
+        const savedValue = localStorage.getItem('beepTrigger');
+        if (savedValue && !isNaN(savedValue)) {
+            reminderAt = parseInt(savedValue);
+            beepInput.value = reminderAt;
+        }
+
+        // Save new value on click
+        saveBeepBtn.addEventListener('click', () => {
+            const value = parseInt(beepInput.value);
+            if (!isNaN(value) && value > 0) {
+                reminderAt = value;
+                localStorage.setItem('beepTrigger', value);
+            }
+        });
+
+        countBtn.addEventListener('click', () => {
+            count++;
+            countDisplay.textContent = count;
+
+            if (count === reminderAt) {
+                beepSound.play();
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            countDisplay.textContent = count;
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
